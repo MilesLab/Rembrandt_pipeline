@@ -23,3 +23,22 @@ On the R console, **optparse** can be installed as follows:
 ```
 install.packages("optparse")
 ```
+
+**RSubread** can be installed as follows:
+
+```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("Rsubread")
+```
+
+**ShortRead** can be installed as follows:
+
+```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ShortRead")
+```
+
