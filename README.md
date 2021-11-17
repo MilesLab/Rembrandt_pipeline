@@ -48,3 +48,18 @@ BiocManager::install("ShortRead")
 
 To run the analysis, it is necessary to generate the COVID-19 amplicon index. This is done using files from the data/ folder.
 
+To create the index, load in R and the *Rsubread* package and enter the following code.
+
+```
+library("Rsubread")
+dir.create("alignment_index")
+Rsubread::buildindex('alignment_index/COVID_amplicon_index',reference = covid_seqs_path)
+```
+
+With this code, we place the indices for the COVID amplicon into the *alignment_index* folder. I call the index, *COVID_amplicon_index*. Other names can be chosen however this is default for the pipeline.
+
+## Questions, Comments, Concerns
+
+An issue can be made at our Github repository. In addition, you can email me at jalal.siddiqui@osumc.edu
+
+
