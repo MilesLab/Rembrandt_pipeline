@@ -73,14 +73,19 @@ Rscript codes/runalign.R --help
 From there you obtain the following options:
 
 Options:
+
         -f CHARACTER, --file=CHARACTER
                 file containing list of sample names and file paths
+
         -a CHARACTER, --align_results=CHARACTER
                 output directory
+
         -x CHARACTER, --index=CHARACTER
                 location of index
+
         -o CHARACTER, --output_meta=CHARACTER
                 output meta file
+
         -h, --help
                 Show this help message and exit
 
