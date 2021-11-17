@@ -32,7 +32,7 @@ samples.names=as.character(meta_file$Name)
 dir.create(output_dir)
 
 print("Aligning reads to sequences")
-#outfilename=c()
+outfilename=c()
 
 for(i in 1:length(samples.names)){
 sam_output = paste(output_dir,"/",samples.names[i],".sam", sep="")
@@ -48,6 +48,8 @@ filepath=sam_output
 print("Extracting N1_SARS_COV2 reads from SAM file",sep="")
 
 outfq = paste(output_dir,"/",samples.names[i],".onlycov.sorted.fq", sep="")
+
+outfilename[i]=outfq
 
 counts = 0
   con = file(filepath, "r")
@@ -93,3 +95,8 @@ counts = 0
   
   close(con)
 }
+
+meta_file = data.frame(meta_file,outfilename)
+write.csv(meta_file, file=as.character(opt$output_meta), quote=F, row.names=F)
+
+
