@@ -58,6 +58,35 @@ Rsubread::buildindex('alignment_index/COVID_amplicon_index',reference = covid_se
 
 With this code, we place the indices for the COVID amplicon into the *alignment_index* folder. I call the index, *COVID_amplicon_index*. Other names can be chosen however this is default for the pipeline.
 
+## Running the Rembrandt Pipeline
+
+There are 2 scripts to call.  
+
+The first is *runalign.R*.
+
+It can be called using *Rscript*. To observe the arguments possible use the help argument as below.
+
+```
+Rscript codes/runalign.R --help
+```
+
+From there you obtain the following options:
+
+Options:
+        -f CHARACTER, --file=CHARACTER
+                file containing list of sample names and file paths
+        -a CHARACTER, --align_results=CHARACTER
+                output directory
+        -x CHARACTER, --index=CHARACTER
+                location of index
+        -o CHARACTER, --output_meta=CHARACTER
+                output meta file
+        -h, --help
+                Show this help message and exit
+
+The --file (-f) option is the path of the meta file that lists the fastq files that need to be processed. In -align_results(-a), the directory for the output is listed. The --index(-x) argument lists the alignment index for Rsubread and --output_meta (-o) is the meta file for the outputted results. 
+
+
 ## Questions, Comments, Concerns
 
 An issue can be made at our Github repository. In addition, you can email me at jalal.siddiqui@osumc.edu
