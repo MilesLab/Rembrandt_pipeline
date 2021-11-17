@@ -89,7 +89,21 @@ Options:
         -h, --help
                 Show this help message and exit
 
-The --file (-f) option is the path of the meta file that lists the fastq files that need to be processed. In -align_results(-a), the directory for the output is listed. The --index(-x) argument lists the alignment index for Rsubread and --output_meta (-o) is the meta file for the outputted results. 
+The --file (-f) option is the path of the meta file that lists the fastq files that need to be processed. This file is a CSV file in the following format:
+
+test,./testdata.fq
+
+The first entry is the sample name and the second entry is the path to the file. 
+
+In -align_results(-a), the directory for the output is listed. The --index(-x) argument lists the alignment index for Rsubread. 
+
+The --output_meta (-o) argument is the meta file for the outputted results. This is a CSV file in the following format:
+
+|Name|Path         |outfilename                                   |
+|----|-------------|----------------------------------------------|
+|test|./testdata.fq|COVID_alignment_results/test.onlycov.sorted.fq|
+
+The *outfilename* column contains the location of the fastq file containing only the COVID aligned sequences. This file path will be needed for the next steps. 
 
 The next script to run is generate_overlap_matrix.R. It uses information on Forward and Reverse barcodes to count how many reads align to each set of primers and discover matching Forward and Reverse barcode pairs as given in the overlap matrix. It can also be called using *Rscript* as below. 
 
