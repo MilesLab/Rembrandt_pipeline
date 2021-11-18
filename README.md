@@ -105,6 +105,14 @@ The --output_meta (-o) argument is the meta file for the outputted results. This
 
 The *outfilename* column contains the location of the fastq file containing only the COVID aligned sequences. This file path will be needed for the next steps. 
 
+As an example, we can enter the following code for the test data.
+
+```
+Rscript runalign.R -f test.meta.txt -a COVID_alignment_results -x alignment_index/COVID_amplicon_index -o test.meta.output.txt
+```
+
+This will result in the meta file for the outputted results and the fastq file of the COVID aligned sequences as above. 
+
 The next script to run is generate_overlap_matrix.R. It uses information on Forward and Reverse barcodes to count how many reads align to each set of primers and discover matching Forward and Reverse barcode pairs as given in the overlap matrix. It can also be called using *Rscript* as below. 
 
 To obtain the necessary options, we can use the -h or --help flag.
@@ -116,7 +124,7 @@ Rscript codes/generate_overlap_matrix.R -h
 Options:
  
        -i CHARACTER, --input=CHARACTER
-                path of input fasta file
+                path of input fastq file
 
         -b CHARACTER, --forward_barcodes=CHARACTER
                 forward primer meta file
@@ -127,8 +135,9 @@ Options:
         -o CHARACTER, --output_file=CHARACTER
                 path to output file
 
+The --input (-i) option is the path of the input fastq file that contains the COVID aligned results. 
 
-The CSV file for the forward barcodes is attached in the data/ folder.  The top 15 barcode primers are as below:
+--forward-barcodes (-b) contains the path of the CSV file containing the forward primer information. The CSV file for the forward barcodes is attached in the data/ folder.  The file must be formatted as such. The top 15 barcode primers are as below:
 
 |Forward.Primer.Name|Sequence                                              |
 |-------------------|------------------------------------------------------|
@@ -148,8 +157,7 @@ The CSV file for the forward barcodes is attached in the data/ folder.  The top 
 |COV-N1-FOR-BC014   |TGTAAAACGACGGCCAGTGCCGAATGGACCCCAAAATCAGCGAAATGCACCCCG|
 |COV-N1-FOR-BC015   |TGTAAAACGACGGCCAGTTACTGCAGGACCCCAAAATCAGCGAAATGCACCCCG|
 
-
-Likewise, we have the CSV file for the reverse barcodes in the data/ folder as well. The top 15 barcode primers for those are also as below:
+--reverse-barcodes (-r) contains the path of the CSV file containing the reverse primer information. Likewise, we have the CSV file for the reverse barcodes in the data/ folder as well. The top 15 barcode primers for those are also as below:
 
 |Reverse.Primer.Name|Sequence                                              |
 |-------------------|------------------------------------------------------|
@@ -169,7 +177,21 @@ Likewise, we have the CSV file for the reverse barcodes in the data/ folder as w
 |COV-N1-REV-BC014   |CAGGAAACAGCTATGACCGTTGAGGGCGTTCTCCATTCTGGTTACTGCCAGTTG|
 |COV-N1-REV-BC015   |CAGGAAACAGCTATGACCCTATCAGGCGTTCTCCATTCTGGTTACTGCCAGTTG|
 
+--output_file (-o) is the path of the overlap matrix that describes how the forward and reverse barcodes overlap with each other on the COVID-aligned reads. An example is shown below.
 
+|FIELD1|COV-N1-REV-BC001|COV-N1-REV-BC022                              |COV-N1-REV-BC048|COV-N1-REV-BC062|COV-N1-REV-BC096|
+|------|----------------|----------------------------------------------|----------------|----------------|----------------|
+|COV-N1-FOR-BC011|55              |29                                            |30              |70              |93              |
+|COV-N1-FOR-BC058|31              |16                                            |22              |32              |4               |
+|COV-N1-FOR-BC060|29              |27                                            |24              |84              |19              |
+|COV-N1-FOR-BC080|27              |31                                            |19              |46              |51              |
+|COV-N1-FOR-BC094|53              |92                                            |5               |82              |84              |
+
+As an example, we can run the following for the test results.
+
+```
+Rscript generate_overlap_matrix.R -i COVID_alignment_results/test.onlycov.sorted.fq -b Forward.Primer.csv -r Reverse.Primer.csv -o test.overlap.mat.csv
+```
 ## Questions, Comments, Concerns
 
 An issue can be made at our Github repository. In addition, you can email me at jalal.siddiqui@osumc.edu

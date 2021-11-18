@@ -3,7 +3,7 @@ library("optparse")
  
 option_list = list(
   make_option(c("-i", "--input"), type="character", default=NULL, 
-              help="path of input fasta file", metavar="character"),
+              help="path of input fastq file", metavar="character"),
     make_option(c("-b", "--forward_barcodes"), type="character", default="Forward.Primer.csv", 
               help="forward primer meta file", metavar="character"),
     make_option(c("-r", "--reverse_barcodes"), type="character", default="Reverse.Primer.csv",
