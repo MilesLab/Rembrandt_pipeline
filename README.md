@@ -122,18 +122,28 @@ Rscript codes/generate_overlap_matrix.R -h
 ```
 
 Options:
- 
-       -i CHARACTER, --input=CHARACTER
-                path of input fastq file
 
+
+        -i CHARACTER, --input=CHARACTER
+                path of input fasta file
+  
         -b CHARACTER, --forward_barcodes=CHARACTER
                 forward primer meta file
-
+ 
         -r CHARACTER, --reverse_barcodes=CHARACTER
                 reverse primer meta file
-
-        -o CHARACTER, --output_file=CHARACTER
+  
+       -o CHARACTER, --output_file=CHARACTER
                 path to output file
+ 
+        -s CHARACTER, --start_point=CHARACTER
+                start point in primer sequence (default: 14)
+ 
+        -t CHARACTER, --end_point=CHARACTER
+                end point in primer sequence (default: 26)
+ 
+        -h, --help
+                Show this help message and exit
 
 The --input (-i) option is the path of the input fastq file that contains the COVID aligned results. 
 
@@ -176,6 +186,8 @@ The --input (-i) option is the path of the input fastq file that contains the CO
 |COV-N1-REV-BC013   |CAGGAAACAGCTATGACACAAACTGGCGTTCTCCATTCTGGTTACTGCCAGTTG|
 |COV-N1-REV-BC014   |CAGGAAACAGCTATGACCGTTGAGGGCGTTCTCCATTCTGGTTACTGCCAGTTG|
 |COV-N1-REV-BC015   |CAGGAAACAGCTATGACCCTATCAGGCGTTCTCCATTCTGGTTACTGCCAGTTG|
+
+--start_point (-s) and --end_point (-t) are the starting and end points in the primer sequences that you wish to search for. Usually this incorporates the necessary barcodes + additional sequences.
 
 --output_file (-o) is the path of the overlap matrix that describes how the forward and reverse barcodes overlap with each other on the COVID-aligned reads. An example is shown below.
 

@@ -3,13 +3,17 @@ library("optparse")
  
 option_list = list(
   make_option(c("-i", "--input"), type="character", default=NULL, 
-              help="path of input fastq file", metavar="character"),
+              help="path of input fasta file", metavar="character"),
     make_option(c("-b", "--forward_barcodes"), type="character", default="Forward.Primer.csv", 
               help="forward primer meta file", metavar="character"),
     make_option(c("-r", "--reverse_barcodes"), type="character", default="Reverse.Primer.csv",
               help="reverse primer meta file", metavar="character"),
     make_option(c("-o", "--output_file"), type="character", default="out.csv",
-              help="path to output file", metavar="character")
+              help="path to output file", metavar="character"),
+   make_option(c("-s", "--start_point"), type="integer", default=14,
+              help="start point in primer sequence (default: 14)", metavar="character"),
+   make_option(c("-t", "--end_point"), type="integer", default=26,
+              help="end point in primer sequence (default: 26)", metavar="character")
 ); 
 
 opt_parser = OptionParser(option_list=option_list);
@@ -18,6 +22,8 @@ print(opt$input)
 print(opt$forward_barcodes)
 print(opt$reverse_barcodes)
 
+startp = opt$start_point
+endp = opt$end_point
 
 
 file_path1 = as.character(opt$input)
@@ -64,8 +70,8 @@ print(names(primers.sequence))
 
 spool.1.sample.seqs = seq.f1
 spool.2.sample.seqs = rc.seq.f1
-start.point = 14
-end.point = 26
+start.point = startp
+end.point = endp
 
 
 #### function to obtain primer counts
@@ -114,8 +120,8 @@ return(getPrimerCounts)
 
 primer.counts.read1 = getPrimerCounts(spool.1.sample.seqs = seq.f1,
                                       spool.2.sample.seqs = rc.seq.f1,
-                                      start.point = 14,
-                                      end.point = 26)
+                                      start.point = startp,
+                                      end.point = endp)
 
 
 #### We will design a function to get the overlap matrix
